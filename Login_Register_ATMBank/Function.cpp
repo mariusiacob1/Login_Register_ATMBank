@@ -86,41 +86,83 @@ void Account::signUp()
 	} while (valid == false);													// Will keep on looping if there's digit in str. Otherwise, it moves on
 
 	// emailOne_ & emailTwo_
-	do
+	const string myArray[] = { "@gmail.com", "@yahoo.com" };
+	
+	for (;;)
 	{
 		cout << "Email: ";
 		cin >> emailOne_;
 		cout << "Re-enter email: ";
 		cin >> emailTwo_;
-
-		if (emailOne_.compare(emailTwo_) != 0)
+		
+		if (emailOne_ != emailTwo_)
 		{
-			valid = false;
 			cerr << "\t[*] ERROR: EMAILS DO NOT MATCH\n\n";
-		}
-		else
-		{
-			valid = true;
+			continue; // back to entering email
 		}
 
-		string myArray[] = {"gmail.com", "yahoo.com"};
-		int arrSize = sizeof(myArray) / sizeof(myArray[0]);
-		for (int i = 0; i < arrSize; i++)
+		bool valid = false;
+
+		// range-based for loop
+		for (const string& end : myArray)
 		{
-			int found = emailOne_.find(myArray[i]);
-			if (emailOne_.find(myArray[i]) == string::npos)
-			{
-				valid = false;
-				cerr << "\t[*] ERROR: EMAILS MUST HAVE @gmail.com or @yahoo.com\n\n";
-				break;
-			}
-			else
+			// check if the end of emailOne_ is equal to `end` by comparing
+			// a substring of emailOne_ with the same length as end, with end:
+
+			if (emailOne_.size() > end.size() &&   // must be long enough
+				emailOne_.substr(emailOne_.size() - end.size()) == end)
 			{
 				valid = true;
-				//break;
+				break;
 			}
 		}
-	} while (valid == false);
+		
+		// check the valid state after the loop:
+		if (!valid) {
+			std::cerr << "\t[*] ERROR: EMAILS MUST HAVE @gmail.com or @yahoo.com\n";
+		}
+		else {
+			break; // a valid email address was found.
+		}
+	}
+	//std::cout << emailOne_ << " is a valid address\n";
+
+
+	//do
+	//{
+	//	cout << "Email: ";
+	//	cin >> emailOne_;
+	//	cout << "Re-enter email: ";
+	//	cin >> emailTwo_;
+
+	//	if (emailOne_.compare(emailTwo_) != 0)
+	//	{
+	//		valid = false;
+	//		cerr << "\t[*] ERROR: EMAILS DO NOT MATCH\n\n";
+	//	}
+	//	else
+	//	{
+	//		valid = true;
+	//	}
+
+	//	string myArray[] = {"gmail.com", "yahoo.com"};
+	//	int arrSize = sizeof(myArray) / sizeof(myArray[0]);
+	//	for (int i = 0; i < arrSize; i++)
+	//	{
+	//		int found = emailOne_.find(myArray[i]);
+	//		if (emailOne_.find(myArray[i]) == string::npos)
+	//		{
+	//			valid = false;
+	//			cerr << "\t[*] ERROR: EMAILS MUST HAVE @gmail.com or @yahoo.com\n\n";
+	//			break;
+	//		}
+	//		else
+	//		{
+	//			valid = true;
+	//			//break;
+	//		}
+	//	}
+	//} while (valid == false);
 
 	// passwordOne_ & passwordTwo_
 	do
