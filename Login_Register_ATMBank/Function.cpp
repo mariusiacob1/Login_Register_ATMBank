@@ -9,41 +9,41 @@
 using namespace std;
 
 // ====================== Account Functions ========================================
-bool isSpecialChar(char ch)									// Function to check if string has a special char
+bool isSpecialChar(char ch)				// Function to check if string has a special char
 {
-	bool isSpecial = false;									// isSpecial is set to false because we don't know if it has special char yet
-	if (!isdigit(ch) && !isalpha(ch))						// If not a number or a alphabetic letter, then it's a special char	(ERROR)
+	bool isSpecial = false;				// isSpecial is set to false because we don't know if it has special char yet
+	if (!isdigit(ch) && !isalpha(ch))   // If not a number or a alphabetic letter, then it's a special char	(ERROR)
 	{
-		isSpecial = true;									// isSpecial becomes TRUE when a special char is found
+		isSpecial = true;				// isSpecial becomes TRUE when a special char is found
 	}
-	return isSpecial;										// If there isn't a special char, it proceeds to isDigitChar function
+	return isSpecial;					// If there isn't a special char, it proceeds to isDigitChar function
 }
 
-bool isDigitChar(char ch)									// Function to check if string has a digit char
-{
-	bool isDigitChar = false;								// isDigitChar is set to false because we don't know if it has digit char yet
-	if (isdigit(ch))										// If there's a number, then error message will pop	
+bool isDigitChar(char ch			// Function to check if string has a digit char
 	{
-		isDigitChar = true;									// isDigitChar becomes TRUE when a digit char is found
+		bool isDigitChar = false;   // isDigitChar is set to false because we don't know if it has digit char yet
+	if (isdigit(ch))				// If there's a number, then error message will pop	
+	{
+		isDigitChar = true;			// isDigitChar becomes TRUE when a digit char is found
 	}
-	return isDigitChar; 									// If there isn't a digit char, it proceeds
+	return isDigitChar;				// If there isn't a digit char, it proceeds
 }
 
 /**/
-bool isNameValid(string flName)												// flName = first and last name
-{
+bool isNameValid(string flName)									  // flName = first and last name
+{	
 	// Check for numbers in firstName_
-	for (size_t i = 0; i < flName.size(); i++)								// Goes through the string firstName_
+	for (size_t i = 0; i < flName.size(); i++)					  // Goes through the string firstName_
 	{
-		if (isSpecialChar(flName[i]) || isDigitChar(flName[i]))				// Checking if firstName_[i] is a special/digit char
+		if (isSpecialChar(flName[i]) || isDigitChar(flName[i]))   // Checking if firstName_[i] is a special/digit char
 		{
-			cerr << "\t[*] ERROR: FIRST NAME INCORRECT\n\n";				// Error message
-			return false;													// If special/digit char is found, valid becomes false; error message
-			//break;														// Stops and re-runs the loop
+			cerr << "\t[*] ERROR: FIRST NAME INCORRECT\n\n";	  // Error message
+			return false;										  // If special/digit char is found, valid becomes false; error message
+			//break;											  // Stops and re-runs the loop
 		}
 		else
 		{
-			return true;													// firstName_ contains no special/digit char. Goes on to lastName_
+			return true;										  // firstName_ contains no special/digit char. Goes on to lastName_
 		}
 	}
 }
@@ -61,7 +61,7 @@ void Account::signUp()
 		cout << "First name: ";
 		cin >> firstName_;
 		isNameValid(firstName_);
-	} while (valid == false);													// Will keep on looping if there's a special/digit char in str. Otherwise, it moves on
+	} while (valid == false);	// Will keep on looping if there's a special/digit char in str. Otherwise, it moves on
 
 	// lastName_
 	do
@@ -70,20 +70,20 @@ void Account::signUp()
 		cin >> lastName_;
 
 		// Check for spcial char or digit in lastName_
-		for (size_t i = 0; i < lastName_.size(); i++)							// Goes through the string lastName_
+		for (size_t i = 0; i < lastName_.size(); i++)						// Goes through the string lastName_
 		{
-			if (isSpecialChar(lastName_[i]) || isDigitChar(lastName_[i]))		// Checking if lastName_[i] is a special/digit char
+			if (isSpecialChar(lastName_[i]) || isDigitChar(lastName_[i]))	// Checking if lastName_[i] is a special/digit char
 			{
-				valid = false;													// If special/digit char is found, valid becomes false; error message
-				cerr << "\t[*] ERROR: LAST NAME INCORRECT\n\n";					// Error message 
-				break;															// Stops and re-runs the loop
+				valid = false;												// If special/digit char is found, valid becomes false; error message
+				cerr << "\t[*] ERROR: LAST NAME INCORRECT\n\n";				// Error message 
+				break;														// Stops and re-runs the loop
 			}
 			else
 			{
-				valid = true;													// lastName_ contains no special/digit char. Goes on to lastName_
+				valid = true;												// lastName_ contains no special/digit char. Goes on to lastName_
 			}
 		}
-	} while (valid == false);													// Will keep on looping if there's digit in str. Otherwise, it moves on
+	} while (valid == false);												// Will keep on looping if there's digit in str. Otherwise, it moves on
 
 	// emailOne_ & emailTwo_
 	const string myArray[] = { "@gmail.com", "@yahoo.com" };
@@ -108,7 +108,6 @@ void Account::signUp()
 		{
 			// check if the end of emailOne_ is equal to `end` by comparing
 			// a substring of emailOne_ with the same length as end, with end:
-
 			if (emailOne_.size() > end.size() &&   // must be long enough
 				emailOne_.substr(emailOne_.size() - end.size()) == end)
 			{
@@ -117,54 +116,15 @@ void Account::signUp()
 			}
 		}
 		
-		// check the valid state after the loop:
-		if (!valid) {
+		if (!valid)   // check the valid state after the loop: 
+		{
 			std::cerr << "\t[*] ERROR: EMAILS MUST HAVE @gmail.com or @yahoo.com\n";
 		}
 		else {
-			break; // a valid email address was found.
+			break;   // a valid email address was found.
 		}
 	}
-	//std::cout << emailOne_ << " is a valid address\n";
 
-
-	//do
-	//{
-	//	cout << "Email: ";
-	//	cin >> emailOne_;
-	//	cout << "Re-enter email: ";
-	//	cin >> emailTwo_;
-
-	//	if (emailOne_.compare(emailTwo_) != 0)
-	//	{
-	//		valid = false;
-	//		cerr << "\t[*] ERROR: EMAILS DO NOT MATCH\n\n";
-	//	}
-	//	else
-	//	{
-	//		valid = true;
-	//	}
-
-	//	string myArray[] = {"gmail.com", "yahoo.com"};
-	//	int arrSize = sizeof(myArray) / sizeof(myArray[0]);
-	//	for (int i = 0; i < arrSize; i++)
-	//	{
-	//		int found = emailOne_.find(myArray[i]);
-	//		if (emailOne_.find(myArray[i]) == string::npos)
-	//		{
-	//			valid = false;
-	//			cerr << "\t[*] ERROR: EMAILS MUST HAVE @gmail.com or @yahoo.com\n\n";
-	//			break;
-	//		}
-	//		else
-	//		{
-	//			valid = true;
-	//			//break;
-	//		}
-	//	}
-	//} while (valid == false);
-
-	// passwordOne_ & passwordTwo_
 	do
 	{
 		cout << "Password: ";
