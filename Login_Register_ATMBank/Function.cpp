@@ -9,6 +9,29 @@
 using namespace std;
 
 // ====================== Account Functions ========================================
+
+string Account::getName()
+{
+	string name;
+	name = getFirstName() + " " + getLastName();
+	return name;
+}
+
+string Account::getFirstName()
+{
+	return firstName_;
+}
+
+string Account::getLastName()
+{
+	return lastName_;
+}
+
+string Account::getEmail()
+{
+	return emailTwo_;
+}
+
 bool isSpecialChar(char ch)				// Function to check if string has a special char
 {
 	bool isSpecial = false;				// isSpecial is set to false because we don't know if it has special char yet
@@ -19,7 +42,7 @@ bool isSpecialChar(char ch)				// Function to check if string has a special char
 	return isSpecial;					// If there isn't a special char, it proceeds to isDigitChar function
 }
 
-bool isDigitChar(char ch			// Function to check if string has a digit char
+bool isDigitChar(char ch)			// Function to check if string has a digit char
 	{
 		bool isDigitChar = false;   // isDigitChar is set to false because we don't know if it has digit char yet
 	if (isdigit(ch))				// If there's a number, then error message will pop	
@@ -46,6 +69,7 @@ bool isNameValid(string flName)									  // flName = first and last name
 			return true;										  // firstName_ contains no special/digit char. Goes on to lastName_
 		}
 	}
+	return false;
 }
 
 void Account::signUp()
@@ -143,7 +167,7 @@ void Account::signUp()
 		}
 	} while (valid == false);
 
-	cout << "\nThank you for signing up! Your account will be created shortly\n";
+	cout << "\nThank you, " << getName() << " for signing up with us! Your account will be created shortly\n";
 	cout << "What would you like to do now?\n\n";
 	ATM atm;
 	atm.displayMenu();

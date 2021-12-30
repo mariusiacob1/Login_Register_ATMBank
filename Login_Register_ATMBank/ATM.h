@@ -34,6 +34,12 @@ public:
 
     void signUp();
     void signIn();
+
+    // Getters
+    std::string getName();
+    std::string getFirstName();
+    std::string getLastName();
+    std::string getEmail();
     // bool readInFiles(const std::string& signup)
 
 private:
